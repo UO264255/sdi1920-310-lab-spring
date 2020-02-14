@@ -1,51 +1,52 @@
 package com.uniovi.services;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.uniovi.entities.Mark;
 import com.uniovi.entities.Teacher;
+import com.uniovi.repositories.TeacherRepository;
 
 @Service
 public class TeacherService {
 
-	List<Teacher> teacherList = new LinkedList<Teacher>();
+	@Autowired
+	private TeacherRepository tRepo;
 
 	@PostConstruct
 	public void init() {
-		teacherList.add(new Teacher(1L, "1232213D", "Alex", "Matas", "Category1"));
-		teacherList.add(new Teacher(2L, "1232213D", "Angel", "Olmedo", "Category2"));
-		teacherList.add(new Teacher(3L, "1232213D", "Guillermo", "Campoamor", "Category3"));
-		teacherList.add(new Teacher(4L, "1232213D", "Hola", "Que tal", "No"));
+		tRepo.save(new Teacher(1L, "1232213D", "Alex", "Matas", "Category1"));
+		tRepo.save(new Teacher(2L, "1232213D", "Angel", "Olmedo", "Category2"));
+		tRepo.save(new Teacher(3L, "1232213D", "Guillermo", "Campoamor", "Category3"));
+		tRepo.save(new Teacher(4L, "1232213D", "Hola", "Que tal", "No"));
 	}
 
 	public List<Teacher> getTeacherList() {
-		return teacherList;
+		List<Teacher> teachers = new ArrayList<Teacher>();
+		tRepo.findAll().forEach(teachers::add);
+		return teachers;
 	}
 
 	public Teacher getTeacher(Long id) {
-		return teacherList.stream().filter(teacher -> teacher.getId().equals(id)).findFirst().get();
+		return tRepo.findById(id).get();
 	}
 
 	public void addTeacher(Teacher teacher) {
-		if (teacher.getId() == null) {
-			teacher.setId(teacherList.get(teacherList.size() - 1).getId() + 1);
-		}
-		
-		teacherList.add(teacher);
+		tRepo.save(teacher);
 	}
-	
+
 	public void editTeacher(Teacher teacherToReplace) {
-		Teacher teach = teacherList.stream().filter(teacher -> teacher.getId().equals(teacherToReplace.getId())).findFirst().get();
-		int index = teacherList.indexOf(teach);
-		teacherList.set(index,teacherToReplace);
+		addTeacher(teacherToReplace);
 	}
 
 	public void deleteTeacher(Long id) {
-		teacherList.removeIf(teacher-> teacher.getId().equals(id));
+		tRepo.deleteById(id);
 	}
-	
+
 }
