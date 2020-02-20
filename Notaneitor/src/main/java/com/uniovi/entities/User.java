@@ -19,9 +19,9 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Mark> marks;
 
-	private String password;
+	private String password="";
 	@Transient
-	private String passwordConfirm;
+	private String passwordConfirm="";
 
 	public User(String dni, String name, String lastName) {
 		super();
