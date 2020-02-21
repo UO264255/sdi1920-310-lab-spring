@@ -6,10 +6,9 @@
 
 <body>
 	<div class="container">
-		<h2>Notas</h2>
-		<p>Las notas que actualmente figuran en el sistema son las
-			siguientes:</p>
-		<button type ="button" id="updateButton" class="btn btn-default">Actualizar
+		<h2 th:text="#{marks.list.message}">Notas</h2>
+		<p th:text="#{marks.list.description}"></p>
+		<button type ="button" id="updateButton" class="btn btn-default" th:text="#{marks.list.update}">Actualizar
 		</button>
 		<script>
 			$("#updateButton").click(function() {
