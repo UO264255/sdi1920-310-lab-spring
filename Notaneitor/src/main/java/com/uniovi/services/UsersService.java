@@ -43,4 +43,9 @@ public class UsersService {
 	public void deleteUser(Long id) {
 		usersRepository.deleteById(id);
 	}
+
+	public void addEncryptelessUser(User previous) {
+		usersRepository.save(previous);
+		
+	}
 }
