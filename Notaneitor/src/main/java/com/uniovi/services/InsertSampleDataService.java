@@ -36,7 +36,7 @@ public class InsertSampleDataService {
 		user4.setRole(rolesService.getRoles()[1]);
 		User user5 = new User("99999977E", "Pelayo", "Valdes");
 		user5.setPassword("123456");
-		user5.setRole(rolesService.getRoles()[2]);
+		user5.setRole(rolesService.getRoles()[1]);
 		User user6 = new User("99999988F", "Edward", "Núñez");
 		user6.setPassword("123456");
 		user6.setRole(rolesService.getRoles()[2]);
