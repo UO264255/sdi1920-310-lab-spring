@@ -89,11 +89,11 @@ public class MarksControllers {
 
 	@RequestMapping("/mark/list/update")
 	public String updateList(Model model, Pageable pageable, Principal principal) {
-		String dni = principal.getName(); // DNI esel name delaautenticación
+		String dni = principal.getName(); // DNI es el name de la autenticación
 		User user = usersService.getUserByDni(dni);
 		Page<Mark> marks = marksService.getMarksForUser(pageable, user);
 		model.addAttribute("markList", marks.getContent());
-		return "mark/list :: tableMarks";
+		return "fragments/markTable :: tableMarks";
 	}
 
 	@RequestMapping(value = "/mark/{id}/resend", method = RequestMethod.GET)
