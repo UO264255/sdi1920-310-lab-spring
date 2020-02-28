@@ -46,6 +46,12 @@ public class UsersService {
 
 	public void addEncryptelessUser(User previous) {
 		usersRepository.save(previous);
-		
+	}
+	
+	public List<User> searchUsersByNameOrLastName(String searchText){
+		List<User> users = new ArrayList<User>();
+		searchText = "%"+searchText+"%";
+		users = usersRepository.findByNameOrLastName(searchText);
+		return users;
 	}
 }
